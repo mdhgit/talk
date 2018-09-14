@@ -9,7 +9,7 @@ use Pusher\Pusher;
 
 class Broadcast
 {
-    use DispatchesJobs;
+    //use DispatchesJobs; Commented to work with Lumen
 
     /*
      * Constant for talk config prefix
