@@ -9,7 +9,7 @@ use Pusher\Pusher;
 
 class Broadcast
 {
-    use DispatchesJobs;
+    //use DispatchesJobs;
 
     /*
      * Constant for talk config prefix
