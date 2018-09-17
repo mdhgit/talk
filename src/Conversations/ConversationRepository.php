@@ -3,6 +3,7 @@
 namespace Nahid\Talk\Conversations;
 
 use SebastianBerc\Repositories\Repository;
+use \Nahid\Talk\Messages\Message;
 
 class ConversationRepository extends Repository
 {
@@ -101,11 +102,15 @@ class ConversationRepository extends Repository
             ->get();
 
         $threads = [];
-
+        $mess = new Message;
+        
         foreach ($msgThread as $thread) {
             $collection = (object) null;
             $conversationWith = ($thread->userone->id == $user) ? $thread->usertwo : $thread->userone;
             $collection->thread = $thread->messages->first();
+            //get unread count for user by conversation id
+            $unreadMessages = $mess->where('user_id', $user)->where('is_seen', 0)->where('conversation_id', $collection->thread->conversation_id)->get()->count(); 
+            $collection->thread->unread_count = $unreadMessages;
             $collection->withUser = $conversationWith;
             $threads[] = $collection;
         }
