@@ -109,8 +109,7 @@ class ConversationRepository extends Repository
             $conversationWith = ($thread->userone->id == $user) ? $thread->usertwo : $thread->userone;
             $collection->thread = $thread->messages->first();
             //get unread count for user by conversation id
-            $unreadMessages = $mess->where('user_id', $user)->where('is_seen', 0)->where('conversation_id', $collection->thread->conversation_id)->get()->count(); 
-            $collection->thread->unread_count = $unreadMessages;
+            $collection->thread->unread_count = $mess->where('user_id', $user)->where('is_seen', 0)->where('conversation_id', $collection->thread->conversation_id)->get()->count();
             $collection->withUser = $conversationWith;
             $threads[] = $collection;
         }
