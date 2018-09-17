@@ -499,7 +499,7 @@ class Talk
         $userModel = config('talk.user.model');
         $user = new $userModel();
 
-        return $user->find($receiver);
+        return $user->find($receiver,['uid','first_name','last_name']);
     }
 
     /**
